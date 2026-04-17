@@ -1,7 +1,13 @@
-function PopUser({ user }) {
+function PopUser({ user, isOpen, onClose }) {
   return (
-    <div className="header__pop-user-set pop-user-set" id="user-set-target">
-      <a href="#">x</a>
+     <div
+      className="header__pop-user-set pop-user-set"
+      id="user-set-target"
+      style={{ display: isOpen ? 'block' : 'none' }}
+    >
+      <button type="button" className="pop-user-set__close" onClick={onClose}>
+        x
+      </button>
       <p className="pop-user-set__name">{user.name}</p>
       <p className="pop-user-set__mail">{user.email}</p>
       <div className="pop-user-set__theme">

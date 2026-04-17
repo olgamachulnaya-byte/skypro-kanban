@@ -397,6 +397,18 @@ body {
   justify-content: space-between;
 }
 
+.pop-user-set__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  color: #94A6BE;
+  font-size: 14px;
+  line-height: 1;
+}
+
+
 .pop-user-set__name {
   color: #000;
   font-size: 14px;

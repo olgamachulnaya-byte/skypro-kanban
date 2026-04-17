@@ -1,6 +1,18 @@
+import { useState } from 'react'
 import PopUser from '../PopUser/PopUser'
 
 function Header({ user }) {
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+
+  const handleUserClick = (event) => {
+    event.preventDefault()
+    setIsUserMenuOpen((prevState) => !prevState)
+  }
+
+  const handleCloseUserMenu = () => {
+    setIsUserMenuOpen(false)
+  }
+
   return (
     <header className="header">
       <div className="container">
@@ -21,10 +33,10 @@ function Header({ user }) {
             <button className="header__btn-main-new _hover01" id="btnMainNew">
               <a href="#popNewCard">Создать новую задачу</a>
             </button>
-            <a href="#user-set-target" className="header__user _hover02">
+            <a href="#" className="header__user _hover02" onClick={handleUserClick}>
               {user.name}
             </a>
-            <PopUser user={user} />
+            <PopUser user={user} isOpen={isUserMenuOpen} onClose={handleCloseUserMenu} />
           </nav>
         </div>
       </div>
