@@ -1002,6 +1002,17 @@ body {
   width: 100%;
   display: flex;
 }
+.main__loading {
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94A6BE;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
+}
 .main__column {
   width: 20%;
   margin: 0 auto;
@@ -1114,6 +1125,9 @@ body {
   }
   .main__content {
     display: block;
+  }
+   .main__loading {
+    min-height: 40vh;
   }
   .main__column {
     width: 100%;
