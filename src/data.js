@@ -1,0 +1,58 @@
+export const cardList = [
+  {
+    id: 1,
+    topic: 'Web Design',
+    title: 'Сверстать карточку профиля',
+    date: '18.04.26',
+    status: 'Без статуса',
+  },
+  {
+    id: 2,
+    topic: 'Research',
+    title: 'Собрать референсы по конкурентам',
+    date: '19.04.26',
+    status: 'Нужно сделать',
+  },
+  {
+    id: 3,
+    topic: 'Copywriting',
+    title: 'Подготовить текст для лендинга',
+    date: '20.04.26',
+    status: 'В работе',
+  },
+  {
+    id: 4,
+    topic: 'Web Design',
+    title: 'Обновить UI кнопок',
+    date: '21.04.26',
+    status: 'Тестирование',
+  },
+  {
+    id: 5,
+    topic: 'Research',
+    title: 'Провести интервью с пользователями',
+    date: '22.04.26',
+    status: 'Готово',
+  },
+  {
+    id: 6,
+    topic: 'Copywriting',
+    title: 'Согласовать tone of voice',
+    date: '23.04.26',
+    status: 'Без статуса',
+  },
+  {
+    id: 7,
+    topic: 'Web Design',
+    title: 'Подготовить макет для мобильной версии',
+    date: '24.04.26',
+    status: 'Нужно сделать',
+  },
+  {
+    id: 8,
+    topic: 'Research',
+    title: 'Проверить гипотезу по онбордингу',
+    date: '25.04.26',
+    status: 'В работе',
+  },
+]
