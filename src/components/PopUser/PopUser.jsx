@@ -5,8 +5,8 @@ function PopUser({ user, isOpen, onClose }) {
       id="user-set-target"
       style={{ display: isOpen ? 'block' : 'none' }}
     >
-      <button type="button" className="pop-user-set__close" onClick={onClose}>
-        x
+       <button type="button" className="pop-user-set__close" onClick={onClose} aria-label="Закрыть">
+        ×
       </button>
       <p className="pop-user-set__name">{user.name}</p>
       <p className="pop-user-set__mail">{user.email}</p>
@@ -14,7 +14,7 @@ function PopUser({ user, isOpen, onClose }) {
         <p>Темная тема</p>
         <input type="checkbox" className="checkbox" name="checkbox" />
       </div>
-      <button type="button" className="_hover03">
+      <button type="button" className="pop-user-set__logout _hover03">
         <a href="#popExit">Выйти</a>
       </button>
     </div>
