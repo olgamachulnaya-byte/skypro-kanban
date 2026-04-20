@@ -1,13 +1,15 @@
+import { Container } from '../../App.styled'
 import Column from '../Column/Column'
+import { Loading, MainBlock, MainContent, MainRoot } from './Main.styled'
 
 function Main({ columns, cards, isLoading }) {
   return (
-    <main className="main">
-      <div className="container">
-        <div className="main__block">
-          <div className="main__content">
-             {isLoading ? (
-              <div className="main__loading">Данные загружаются</div>
+    <MainRoot>
+      <Container>
+        <MainBlock>
+          <MainContent>
+            {isLoading ? (
+              <Loading>Данные загружаются</Loading>
             ) : (
               columns.map((column) => (
                 <Column
@@ -17,10 +19,10 @@ function Main({ columns, cards, isLoading }) {
                 />
               ))
             )}
-          </div>
-        </div>
-      </div>
-    </main>
+          </MainContent>
+        </MainBlock>
+      </Container>
+    </MainRoot>
   )
 }
 

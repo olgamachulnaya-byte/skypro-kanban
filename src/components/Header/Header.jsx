@@ -1,5 +1,15 @@
 import { useState } from 'react'
+import { Container } from '../../App.styled'
 import PopUser from '../PopUser/PopUser'
+import {
+  HeaderBlock,
+  HeaderRoot,
+  LogoDark,
+  LogoLight,
+  Nav,
+  NewTaskButton,
+  UserLink,
+} from './Header.styled'
 
 function Header({ user }) {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
@@ -14,33 +24,33 @@ function Header({ user }) {
   }
 
   return (
-    <header className="header">
-      <div className="container">
-        <div className="header__block">
-          <div className="header__logo _show _light">
+    <HeaderRoot>
+      <Container>
+        <HeaderBlock>
+          <LogoLight>
             <a href="#" target="_self">
               <img src="/images/logo.png" alt="logo" />
             </a>
-          </div>
+          </LogoLight>
 
-          <div className="header__logo _dark">
+          <LogoDark>
             <a href="#" target="_self">
               <img src="/images/logo_dark.png" alt="logo" />
             </a>
-          </div>
+          </LogoDark>
 
-          <nav className="header__nav">
-            <button className="header__btn-main-new _hover01" id="btnMainNew">
+           <Nav>
+            <NewTaskButton id="btnMainNew">
               <a href="#popNewCard">Создать новую задачу</a>
-            </button>
-            <a href="#" className="header__user _hover02" onClick={handleUserClick}>
+            </NewTaskButton>
+            <UserLink href="#" onClick={handleUserClick}>
               {user.name}
-            </a>
+            </UserLink>
             <PopUser user={user} isOpen={isUserMenuOpen} onClose={handleCloseUserMenu} />
-          </nav>
-        </div>
-      </div>
-    </header>
+         </Nav>
+        </HeaderBlock>
+      </Container>
+    </HeaderRoot>
   )
 }
 

@@ -1,26 +1,36 @@
+import {
+  CardBody,
+  CardContent,
+  CardDate,
+  CardGroup,
+  CardItem,
+  CardMenuButton,
+  CardTheme,
+  CardTitle,
+} from './Card.styled'
 function Card({ themeClass, themeText, title = 'Название задачи', date = '30.10.23' }) {
   return (
-    <div className="cards__item">
-      <div className="cards__card card">
-        <div className="card__group">
-          <div className={`card__theme ${themeClass}`}>
-            <p className={themeClass}>{themeText}</p>
-          </div>
+    <CardItem>
+      <CardBody>
+        <CardGroup>
+          <CardTheme $themeClass={themeClass}>
+            <p>{themeText}</p>
+          </CardTheme>
           <a href="#popBrowse" target="_self">
-            <div className="card__btn">
+            <CardMenuButton>
               <div></div>
               <div></div>
               <div></div>
-            </div>
+           </CardMenuButton>
           </a>
-        </div>
+        </CardGroup>
 
-        <div className="card__content">
+        <CardContent>
           <a href="#" target="_blank" rel="noreferrer">
-            <h3 className="card__title">{title}</h3>
+            <CardTitle>{title}</CardTitle>
           </a>
 
-          <div className="card__date">
+           <CardDate>
             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
               <g clipPath="url(#cardDateClip)">
                 <path
@@ -44,10 +54,10 @@ function Card({ themeClass, themeText, title = 'Название задачи', 
               </defs>
             </svg>
             <p>{date}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+           </CardDate>
+        </CardContent>
+      </CardBody>
+    </CardItem>
   )
 }
 

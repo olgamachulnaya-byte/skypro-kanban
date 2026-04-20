@@ -7,6 +7,7 @@ import PopExit from './components/PopExit/PopExit'
 import PopNewCard from './components/PopNewCard/PopNewCard'
 import { cardList } from './data'
 import { columns, currentUser } from './data/mockData'
+import { AppWrapper } from './App.styled'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -22,13 +23,13 @@ function App() {
   }, [])
 
   return (
-    <div className="wrapper">
+    <AppWrapper>
       <PopExit />
       <PopNewCard />
       <PopBrowse />
       <Header user={currentUser} />
       <Main columns={columns} cards={cards} isLoading={isLoading} />
-    </div>
+    </AppWrapper>
   )
 }
 
