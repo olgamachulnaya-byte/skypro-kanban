@@ -1,4 +1,5 @@
 import Card from '../Card/Card'
+import { CardsList, ColumnRoot, ColumnTitle } from './Column.styled'
 
 function Column({ title, cards }) {
   const topicClasses = {
@@ -8,12 +9,12 @@ function Column({ title, cards }) {
   }
 
   return (
-    <div className="main__column column">
-      <div className="column__title">
+    <ColumnRoot>
+      <ColumnTitle>
         <p>{title}</p>
-      </div>
+      </ColumnTitle>
 
-      <div className="cards">
+      <CardsList>
         {cards.map((card) => (
           <Card
             key={card.id}
@@ -23,8 +24,8 @@ function Column({ title, cards }) {
             date={card.date}
           />
         ))}
-      </div>
-    </div>
+      </CardsList>
+    </ColumnRoot>
   )
 }
 

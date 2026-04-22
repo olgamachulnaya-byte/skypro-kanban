@@ -1,23 +1,29 @@
+import {
+  CloseButton,
+  Email,
+  LogoutButton,
+  Name,
+  PopUserRoot,
+  ThemeCheckbox,
+  ThemeRow,
+} from './PopUser.styled'
+
 function PopUser({ user, isOpen, onClose }) {
   return (
-     <div
-      className="header__pop-user-set pop-user-set"
-      id="user-set-target"
-      style={{ display: isOpen ? 'block' : 'none' }}
-    >
-       <button type="button" className="pop-user-set__close" onClick={onClose} aria-label="Закрыть">
+     <PopUserRoot id="user-set-target" $isOpen={isOpen}>
+      <CloseButton type="button" onClick={onClose} aria-label="Закрыть">
         ×
-      </button>
-      <p className="pop-user-set__name">{user.name}</p>
-      <p className="pop-user-set__mail">{user.email}</p>
-      <div className="pop-user-set__theme">
+      </CloseButton>
+      <Name>{user.name}</Name>
+      <Email>{user.email}</Email>
+      <ThemeRow>
         <p>Темная тема</p>
-        <input type="checkbox" className="checkbox" name="checkbox" />
-      </div>
-      <button type="button" className="pop-user-set__logout _hover03">
+         <ThemeCheckbox type="checkbox" name="checkbox" />
+      </ThemeRow>
+      <LogoutButton type="button">
         <a href="#popExit">Выйти</a>
-      </button>
-    </div>
+     </LogoutButton>
+    </PopUserRoot>
   )
 }
 
