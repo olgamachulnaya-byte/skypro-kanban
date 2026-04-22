@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Container } from '../../App.styled'
+import { Link } from '../../lib/router'
 import PopUser from '../PopUser/PopUser'
 import {
   HeaderBlock,
@@ -28,26 +29,26 @@ function Header({ user }) {
       <Container>
         <HeaderBlock>
           <LogoLight>
-            <a href="#" target="_self">
+            <Link to="/">
               <img src="/images/logo.png" alt="logo" />
-            </a>
+            </Link>
           </LogoLight>
 
           <LogoDark>
-            <a href="#" target="_self">
+            <Link to="/">
               <img src="/images/logo_dark.png" alt="logo" />
-            </a>
+            </Link>
           </LogoDark>
 
-           <Nav>
+          <Nav>
             <NewTaskButton id="btnMainNew">
-              <a href="#popNewCard">Создать новую задачу</a>
+              <Link to="/card/new">Создать новую задачу</Link>
             </NewTaskButton>
             <UserLink href="#" onClick={handleUserClick}>
               {user.name}
             </UserLink>
             <PopUser user={user} isOpen={isUserMenuOpen} onClose={handleCloseUserMenu} />
-         </Nav>
+          </Nav>
         </HeaderBlock>
       </Container>
     </HeaderRoot>

@@ -1,16 +1,17 @@
 import Calendar from '../Calendar/Calendar'
 import { categoryThemes } from '../../data/mockData'
+import { Link } from '../../lib/router'
 
-function PopNewCard() {
+function PopNewCard({ forceOpen = false }) {
   return (
-    <div className="pop-new-card" id="popNewCard">
+    <div className="pop-new-card" id="popNewCard" style={forceOpen ? { display: 'block' } : undefined}>
       <div className="pop-new-card__container">
         <div className="pop-new-card__block">
           <div className="pop-new-card__content">
             <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            <a href="#" className="pop-new-card__close">
+             <Link to="/" className="pop-new-card__close">
               &#10006;
-            </a>
+             </Link>
 
             <div className="pop-new-card__wrap">
               <form className="pop-new-card__form form-new" id="formNewCard" action="#">

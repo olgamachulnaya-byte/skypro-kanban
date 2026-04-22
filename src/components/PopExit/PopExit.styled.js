@@ -15,7 +15,7 @@ const baseActionButton = `
 `
 
 export const PopExitRoot = styled.div`
-  display: none;
+  display: ${({ $forceOpen }) => ($forceOpen ? 'block' : 'none')};
   width: 100%;
   height: 100%;
   min-width: 320px;
