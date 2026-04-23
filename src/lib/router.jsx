@@ -112,11 +112,14 @@ export function Link({ to, children, onClick, ...props }) {
   const navigate = useNavigate()
 
   const handleClick = (event) => {
-    event.preventDefault()
     onClick?.(event)
-    if (!event.defaultPrevented) {
-      navigate(to)
+    
+     if (event.defaultPrevented) {
+      return
     }
+
+    event.preventDefault()
+    navigate(to)
   }
 
   return (
