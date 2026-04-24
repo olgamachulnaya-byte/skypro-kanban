@@ -1,14 +1,17 @@
 import Calendar from '../Calendar/Calendar'
 import { browseStatusThemes } from '../../data/mockData'
+import { Link } from '../../lib/router'
 
-function PopBrowse() {
+function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
+  const isEditMode = mode === 'edit'
+
   return (
-    <div className="pop-browse" id="popBrowse">
+    <div className="pop-browse" id="popBrowse" style={forceOpen ? { display: 'block' } : undefined}>
       <div className="pop-browse__container">
         <div className="pop-browse__block">
           <div className="pop-browse__content">
             <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">Название задачи</h3>
+              <h3 className="pop-browse__ttl">Задача #{cardId}</h3>
               <div className="categories__theme theme-top _orange _active-category">
                 <p className="_orange">Web Design</p>
               </div>
@@ -35,7 +38,7 @@ function PopBrowse() {
                     className="form-browse__area"
                     name="text"
                     id="textArea01"
-                    readOnly
+                    readOnly={!isEditMode}
                     placeholder="Введите описание задачи..."
                   ></textarea>
                 </div>
@@ -53,36 +56,38 @@ function PopBrowse() {
               </div>
             </div>
 
-            <div className="pop-browse__btn-browse">
-              <div className="btn-group">
-                <button className="btn-browse__edit _btn-bor _hover03">
-                  <a href="#">Редактировать задачу</a>
-                </button>
-                <button className="btn-browse__delete _btn-bor _hover03">
-                  <a href="#">Удалить задачу</a>
-                </button>
-              </div>
-              <button className="btn-browse__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
-              </button>
-            </div>
-
-            <div className="pop-browse__btn-edit _hide">
-              <div className="btn-group">
-                <button className="btn-edit__edit _btn-bg _hover01">
-                  <a href="#">Сохранить</a>
-                </button>
-                <button className="btn-edit__edit _btn-bor _hover03">
-                  <a href="#">Отменить</a>
-                </button>
-                <button className="btn-edit__delete _btn-bor _hover03" id="btnDelete">
-                  <a href="#">Удалить задачу</a>
+             {!isEditMode ? (
+              <div className="pop-browse__btn-browse">
+                <div className="btn-group">
+                  <button className="btn-browse__edit _btn-bor _hover03" type="button">
+                    <Link to={`/card/${cardId}/edit`}>Редактировать задачу</Link>
+                  </button>
+                  <button className="btn-browse__delete _btn-bor _hover03" type="button">
+                    Удалить задачу
+                  </button>
+                </div>
+                <button className="btn-browse__close _btn-bg _hover01" type="button">
+                  <Link to="/">Закрыть</Link>
                 </button>
               </div>
-              <button className="btn-edit__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
-              </button>
-            </div>
+              ) : (
+              <div className="pop-browse__btn-edit">
+                <div className="btn-group">
+                  <button className="btn-edit__edit _btn-bg _hover01" type="button">
+                    Сохранить
+                  </button>
+                  <button className="btn-edit__edit _btn-bor _hover03" type="button">
+                    <Link to={`/card/${cardId}`}>Отменить</Link>
+                  </button>
+                  <button className="btn-edit__delete _btn-bor _hover03" id="btnDelete" type="button">
+                    Удалить задачу
+                  </button>
+                </div>
+                <button className="btn-edit__close _btn-bg _hover01" type="button">
+                  <Link to="/">Закрыть</Link>
+                </button>
+              </div>
+               )}
           </div>
         </div>
       </div>
