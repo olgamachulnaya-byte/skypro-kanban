@@ -4,6 +4,7 @@ import Header from '../components/Header/Header'
 import Main from '../components/Main/Main'
 import { cardList } from '../data'
 import { columns, currentUser } from '../data/mockData'
+import { Outlet } from '../lib/router'
 
 function BoardPage() {
   const [isLoading, setIsLoading] = useState(true)
@@ -22,6 +23,7 @@ function BoardPage() {
     <AppWrapper>
       <Header user={currentUser} />
       <Main columns={columns} cards={cards} isLoading={isLoading} />
+      <Outlet />
     </AppWrapper>
   )
 }

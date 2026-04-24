@@ -1,7 +1,8 @@
-import { Children, cloneElement, createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { Children, createContext, useContext, useEffect, useMemo, useState } from 'react'
 
 const RouterContext = createContext(null)
 const ParamsContext = createContext({})
+const OutletContext = createContext(null)
 
 function normalizePath(path) {
   if (!path) return '/'
@@ -43,6 +44,39 @@ function matchPath(pattern, pathname) {
   return { matched: true, params }
 }
 
+function joinPaths(parentPath, childPath) {
+  if (!childPath) return normalizePath(parentPath)
+  if (childPath.startsWith('/')) return normalizePath(childPath)
+
+  const normalizedParent = normalizePath(parentPath)
+
+  if (normalizedParent === '/') {
+    return normalizePath(`/${childPath}`)
+  }
+
+  return normalizePath(`${normalizedParent}/${childPath}`)
+}
+
+function createRouteBranches(routeElements, parentPath = '', parentRoutes = []) {
+  const branches = []
+
+  for (const routeElement of routeElements) {
+    if (!routeElement?.props?.path) continue
+
+    const fullPath = joinPaths(parentPath || '/', routeElement.props.path)
+    const nextRoutes = [...parentRoutes, routeElement]
+    const children = Children.toArray(routeElement.props.children)
+
+    branches.push({ fullPath, routes: nextRoutes })
+
+    if (children.length > 0) {
+      branches.push(...createRouteBranches(children, fullPath, nextRoutes))
+    }
+  }
+
+  return branches
+}
+
 export function BrowserRouter({ children }) {
   const [pathname, setPathname] = useState(() => normalizePath(window.location.pathname))
 
@@ -75,27 +109,33 @@ export function BrowserRouter({ children }) {
 export function Routes({ children }) {
   const { pathname } = useRouterContext()
   const routeElements = Children.toArray(children)
+  const branches = createRouteBranches(routeElements)
 
-  for (const routeElement of routeElements) {
-    if (!routeElement?.props?.path) continue
+  for (const branch of branches) {
+    const result = matchPath(branch.fullPath, pathname)
 
-    const result = matchPath(routeElement.props.path, pathname)
+    if (!result.matched) continue
 
-    if (result.matched) {
-      return (
-        <ParamsContext.Provider value={result.params}>
-          {cloneElement(routeElement, { _matched: true })}
-        </ParamsContext.Provider>
-      )
+    let outlet = null
+
+   for (let i = branch.routes.length - 1; i >= 0; i -= 1) {
+      const currentRoute = branch.routes[i]
+
+      outlet = <OutletContext.Provider value={outlet}>{currentRoute.props.element}</OutletContext.Provider>
     }
+
+      return <ParamsContext.Provider value={result.params}>{outlet}</ParamsContext.Provider>
   }
 
   return null
 }
 
-export function Route({ element, _matched }) {
-  if (!_matched) return null
-  return element
+export function Route() {
+  return null
+}
+
+export function Outlet() {
+  return useContext(OutletContext)
 }
 
 export function Navigate({ to, replace = false }) {

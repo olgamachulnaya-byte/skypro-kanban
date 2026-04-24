@@ -22,43 +22,16 @@ function AppRoutes() {
             <BoardPage />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route path="card/new" element={<AddTaskPage />} />
+        <Route path="card/:id" element={<CardPage mode="view" />} />
+        <Route path="card/:id/edit" element={<CardPage mode="edit" />} />
+        <Route path="exit" element={<ExitPage onExit={() => setIsAuth(false)} />} />
+      </Route>
       <Route path="/login" element={<LoginPage isAuth={isAuth} onLogin={() => setIsAuth(true)} />} />
       <Route
         path="/register"
         element={<RegisterPage isAuth={isAuth} onRegister={() => setIsAuth(true)} />}
-      />
-      <Route
-        path="/card/new"
-        element={
-          <ProtectedRoute isAuth={isAuth}>
-            <AddTaskPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/card/:id"
-        element={
-          <ProtectedRoute isAuth={isAuth}>
-            <CardPage mode="view" />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/card/:id/edit"
-        element={
-          <ProtectedRoute isAuth={isAuth}>
-            <CardPage mode="edit" />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/exit"
-        element={
-          <ProtectedRoute isAuth={isAuth}>
-            <ExitPage onExit={() => setIsAuth(false)} />
-          </ProtectedRoute>
-        }
       />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
