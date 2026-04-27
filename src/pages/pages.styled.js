@@ -104,6 +104,10 @@ export const NotFoundCard = styled.section`
   padding: 48px 28px;
   text-align: center;
   box-shadow: 0 10px 39px rgba(26, 56, 101, 0.12);
+
+  a {
+    text-decoration: none;
+  }
 `
 
 export const NotFoundCode = styled.p`
@@ -120,5 +124,10 @@ export const NotFoundTitle = styled.h1`
 
 export const NotFoundText = styled.p`
   color: #94a6be;
+  margin-bottom: 20px;
+`
+export const NotFoundHint = styled.p`
+  color: #94a6be;
+  font-size: 12px;
   margin-bottom: 20px;
 `
