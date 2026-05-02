@@ -74,6 +74,7 @@ export const PrimaryButton = styled.button`
   color: #fff;
   font-size: 14px;
   font-weight: 500;
+  cursor: pointer;
 
   &:hover {
     background: #33399b;
@@ -93,41 +94,84 @@ export const NotFoundRoot = styled.main`
   align-items: center;
   justify-content: center;
   padding: 16px;
-  background: #eaedf6;
+  background: radial-gradient(circle at top, #f3f5ff 0%, #eaedf6 45%, #dce1ef 100%);
 `
 
 export const NotFoundCard = styled.section`
   width: 100%;
-  max-width: 420px;
+  max-width: 500px;
   background: #fff;
-  border-radius: 10px;
-  padding: 48px 28px;
+  border-radius: 16px;
+  padding: 52px 32px 36px;
   text-align: center;
-  box-shadow: 0 10px 39px rgba(26, 56, 101, 0.12);
-
+  box-shadow: 0 18px 45px rgba(26, 56, 101, 0.18);
   a {
     text-decoration: none;
   }
 `
 
 export const NotFoundCode = styled.p`
-  font-size: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 108px;
+  height: 108px;
+  font-size: 42px;
   font-weight: 700;
   color: #565eef;
-  margin-bottom: 8px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: rgba(86, 94, 239, 0.12);
 `
 
 export const NotFoundTitle = styled.h1`
-  font-size: 22px;
-  margin-bottom: 8px;
+  font-size: 28px;
+  line-height: 1.15;
+  margin-bottom: 12px;
 `
 
 export const NotFoundText = styled.p`
-  color: #94a6be;
-  margin-bottom: 20px;
+  color: #62718a;
+  margin-bottom: 10px;
+  font-size: 16px;
 `
+
 export const NotFoundHint = styled.p`
   color: #94a6be;
-  font-size: 12px;
-  margin-bottom: 20px;
+  font-size: 14px;
+  margin-bottom: 26px;
+`
+
+export const NotFoundActions = styled.div`
+  display: flex;
+  gap: 10px;
+
+  > * {
+    flex: 1;
+  }
+
+  ${PrimaryButton} {
+    margin-top: 0;
+  }
+
+  @media (max-width: 520px) {
+    flex-direction: column;
+  }
+`
+
+export const SecondaryButton = styled.button`
+  width: 100%;
+  height: 40px;
+  border: 1px solid #d8deeb;
+  border-radius: 6px;
+  background: #fff;
+  color: #565eef;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #565eef;
+    background: rgba(86, 94, 239, 0.05);
+  }
 `

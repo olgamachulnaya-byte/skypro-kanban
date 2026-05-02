@@ -1,5 +1,6 @@
 import { Link } from '../lib/router'
 import {
+  NotFoundActions,
   NotFoundCard,
   NotFoundCode,
   NotFoundHint,
@@ -7,21 +8,29 @@ import {
   NotFoundText,
   NotFoundTitle,
   PrimaryButton,
+  SecondaryButton,
 } from './pages.styled'
 
 function NotFoundPage() {
   return (
     <NotFoundRoot>
       <NotFoundCard>
-         <NotFoundCode>404</NotFoundCode>
-         <NotFoundTitle>Кажется, вы заблудились</NotFoundTitle>
+        <NotFoundCode>404</NotFoundCode>
+        <NotFoundTitle>Страница не найдена</NotFoundTitle>
         <NotFoundText>
-          Такой страницы нет. Проверьте адрес в строке браузера или вернитесь на главную страницу.
+          Похоже, вы перешли по неправильной ссылке или ошиблись в адресе.
         </NotFoundText>
-        <NotFoundHint>Мы уже работаем над тем, чтобы такого больше не происходило.</NotFoundHint>
-        <Link to="/">
-          <PrimaryButton type="button">На главную</PrimaryButton>
-        </Link>
+        <NotFoundHint>
+          Вернитесь на главную и продолжите работу с доской задач.
+        </NotFoundHint>
+        <NotFoundActions>
+          <Link to="/">
+            <PrimaryButton type="button">На главную</PrimaryButton>
+          </Link>
+          <SecondaryButton type="button" onClick={() => window.history.back()}>
+            Назад
+          </SecondaryButton>
+        </NotFoundActions>
       </NotFoundCard>
     </NotFoundRoot>
   )
