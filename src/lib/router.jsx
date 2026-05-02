@@ -46,6 +46,7 @@ function matchPath(pattern, pathname) {
 
 function joinPaths(parentPath, childPath) {
   if (!childPath) return normalizePath(parentPath)
+  if (childPath === '*') return '*'
   if (childPath.startsWith('/')) return normalizePath(childPath)
 
   const normalizedParent = normalizePath(parentPath)
