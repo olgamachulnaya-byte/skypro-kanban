@@ -1,3 +1,4 @@
+import { Link } from '../../lib/router'
 import {
   CloseButton,
   Email,
@@ -10,7 +11,7 @@ import {
 
 function PopUser({ user, isOpen, onClose }) {
   return (
-     <PopUserRoot id="user-set-target" $isOpen={isOpen}>
+    <PopUserRoot id="user-set-target" $isOpen={isOpen}>
       <CloseButton type="button" onClick={onClose} aria-label="Закрыть">
         ×
       </CloseButton>
@@ -18,11 +19,11 @@ function PopUser({ user, isOpen, onClose }) {
       <Email>{user.email}</Email>
       <ThemeRow>
         <p>Темная тема</p>
-         <ThemeCheckbox type="checkbox" name="checkbox" />
+        <ThemeCheckbox type="checkbox" name="checkbox" />
       </ThemeRow>
       <LogoutButton type="button">
-        <a href="#popExit">Выйти</a>
-     </LogoutButton>
+       <Link to="/exit">Выйти</Link>
+      </LogoutButton>
     </PopUserRoot>
   )
 }
