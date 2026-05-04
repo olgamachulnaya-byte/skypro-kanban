@@ -1,3 +1,4 @@
+import { Link } from '../../lib/router'
 import {
   CardBody,
   CardContent,
@@ -8,7 +9,8 @@ import {
   CardTheme,
   CardTitle,
 } from './Card.styled'
-function Card({ themeClass, themeText, title = 'Название задачи', date = '30.10.23' }) {
+
+function Card({ id, themeClass, themeText, title = 'Название задачи', date = '30.10.23' }) {
   return (
     <CardItem>
       <CardBody>
@@ -16,19 +18,19 @@ function Card({ themeClass, themeText, title = 'Название задачи', 
           <CardTheme $themeClass={themeClass}>
             <p>{themeText}</p>
           </CardTheme>
-          <a href="#popBrowse" target="_self">
+            <Link to={`/card/${id}`}>
             <CardMenuButton>
               <div></div>
               <div></div>
               <div></div>
-           </CardMenuButton>
-          </a>
+             </CardMenuButton>
+          </Link>
         </CardGroup>
 
         <CardContent>
-          <a href="#" target="_blank" rel="noreferrer">
+           <Link to={`/card/${id}`}>
             <CardTitle>{title}</CardTitle>
-          </a>
+          </Link>
 
            <CardDate>
             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
@@ -54,7 +56,7 @@ function Card({ themeClass, themeText, title = 'Название задачи', 
               </defs>
             </svg>
             <p>{date}</p>
-           </CardDate>
+          </CardDate>
         </CardContent>
       </CardBody>
     </CardItem>
