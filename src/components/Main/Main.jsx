@@ -2,7 +2,7 @@ import { Container } from '../../App.styled'
 import Column from '../Column/Column'
 import { Loading, MainBlock, MainContent, MainRoot } from './Main.styled'
 
-function Main({ columns, cards, isLoading }) {
+function Main({ columns, cards, isLoading, error }) {
   return (
     <MainRoot>
       <Container>
@@ -10,13 +10,11 @@ function Main({ columns, cards, isLoading }) {
           <MainContent>
             {isLoading ? (
               <Loading>Данные загружаются</Loading>
+               ) : error ? (
+              <Loading style={{ color: '#ff4d4f' }}>{error}</Loading>
             ) : (
               columns.map((column) => (
-                <Column
-                  key={column.title}
-                  title={column.title}
-                  cards={cards.filter((card) => card.status === column.title)}
-                />
+                <Column key={column.title} title={column.title} cards={cards.filter((card) => card.status === column.title)} />
               ))
             )}
           </MainContent>
