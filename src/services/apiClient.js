@@ -14,7 +14,7 @@ const getErrorMessage = (status, fallback = 'Произошла ошибка п�
 }
 
 export async function apiRequest(path, { method = 'GET', body, auth = false } = {}) {
-  const headers = { 'Content-Type': 'application/json' }
+  const headers = {}
   if (auth) {
     const token = getToken()
     if (token) headers.Authorization = `Bearer ${token}`
