@@ -14,7 +14,6 @@ async function authRequest(path = '', payload) {
     response = await fetch(`${AUTH_BASE_URL}${path}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
       body: JSON.stringify(payload),
