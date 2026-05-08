@@ -14,19 +14,32 @@ const getErrorMessage = (status, fallback = 'Произошла ошибка п�
 }
 
 export async function apiRequest(path, { method = 'GET', body, auth = false } = {}) {
-  const headers = {}
+  const headers = {
+    Accept: 'application/json',
+  }
+
+  if (body) {
+    headers['Content-Type'] = 'application/json'
+  }
+
   if (auth) {
     const token = getToken()
     if (token) headers.Authorization = `Bearer ${token}`
   }
 
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined,
-  })
+  let response
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    })
+  } catch {
+    throw new Error('Ошибка сети. Проверьте подключение к интернету.')
+  }
 
   const data = await response.json().catch(() => null)
+  
   if (!response.ok) {
     throw new Error(data?.error || data?.message || getErrorMessage(response.status))
   }
