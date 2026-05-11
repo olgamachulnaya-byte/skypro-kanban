@@ -3,13 +3,14 @@ import { AppWrapper } from '../App.styled'
 import Header from '../components/Header/Header'
 import Main from '../components/Main/Main'
 import { columns } from '../data/mockData'
-import { Outlet } from '../lib/router'
+import { Outlet, useLocation } from '../lib/router'
 import { getTasks } from '../services/tasksApi'
 
 function BoardPage({ user }) {
   const [isLoading, setIsLoading] = useState(true)
   const [cards, setCards] = useState([])
   const [error, setError] = useState('')
+  const { pathname } = useLocation()
 
   useEffect(() => {
      const loadTasks = async () => {
@@ -32,7 +33,7 @@ function BoardPage({ user }) {
       }
     }
     loadTasks()
-  }, [])
+    }, [pathname])
 
   return (
     <AppWrapper>

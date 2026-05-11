@@ -95,9 +95,6 @@ const navigate = useNavigate()
                   />
                 </div>
 
-                <button className="form-new__create _hover01" id="btnCreate" type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? 'Создание...' : 'Создать задачу'}
-                </button>
               </form>
 
               <div className="pop-new-card__calendar">
@@ -120,6 +117,16 @@ const navigate = useNavigate()
                 ))}
               </div>
             </div>
+
+ <button
+              className="form-new__create _hover01"
+              id="btnCreate"
+              form="formNewCard"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Создание...' : 'Создать задачу'}
+            </button>
 
             {error ? <p style={{ color: '#ff4d4f' }}>{error}</p> : null}
           </div>

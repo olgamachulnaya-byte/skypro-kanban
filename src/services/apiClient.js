@@ -18,7 +18,7 @@ export async function apiRequest(path, { method = 'GET', body, auth = false } = 
     Accept: 'application/json',
   }
 
-  if (body) {
+  if (body && !(body instanceof FormData)) {
     headers['Content-Type'] = 'application/json'
   }
 
@@ -32,7 +32,7 @@ export async function apiRequest(path, { method = 'GET', body, auth = false } = 
     response = await fetch(`${API_BASE_URL}${path}`, {
       method,
       headers,
-      body: body ? JSON.stringify(body) : undefined,
+      body: body ? (body instanceof FormData ? body : JSON.stringify(body)) : undefined,
     })
   } catch {
     throw new Error('Ошибка сети. Проверьте подключение к интернету.')
