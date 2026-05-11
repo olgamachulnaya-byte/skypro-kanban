@@ -39,6 +39,7 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
     setIsSubmitting(true)
     try {
       await deleteTask(cardId)
+      window.dispatchEvent(new Event('tasks:changed'))
       alert('Задача удалена.')
       navigate('/', { replace: true })
     } catch (err) {
@@ -60,6 +61,7 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
         description,
         date: task.date,
       })
+      window.dispatchEvent(new Event('tasks:changed'))
       alert('Задача обновлена.')
       navigate(`/card/${cardId}`, { replace: true })
     } catch (err) {

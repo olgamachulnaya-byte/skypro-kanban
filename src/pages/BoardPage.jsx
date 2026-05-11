@@ -33,6 +33,9 @@ function BoardPage({ user }) {
       }
     }
     loadTasks()
+
+      window.addEventListener('tasks:changed', loadTasks)
+    return () => window.removeEventListener('tasks:changed', loadTasks)
     }, [pathname])
 
   return (

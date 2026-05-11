@@ -31,6 +31,7 @@ const navigate = useNavigate()
         status: 'Без статуса',
         date: date || new Date().toISOString(),
       })
+      window.dispatchEvent(new Event('tasks:changed'))
       alert('Задача успешно создана.')
       navigate('/', { replace: true })
     } catch (err) {

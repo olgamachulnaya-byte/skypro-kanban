@@ -14,12 +14,14 @@ const getErrorMessage = (status, fallback = 'Произошла ошибка п�
 }
 
 export async function apiRequest(path, { method = 'GET', body, auth = false } = {}) {
-  const headers = {
-    Accept: 'application/json',
-  }
+ const headers = {}
+
 
   if (body && !(body instanceof FormData)) {
+    headers.Accept = 'application/json'
     headers['Content-Type'] = 'application/json'
+    } else {
+    headers.Accept = 'application/json'
   }
 
   if (auth) {

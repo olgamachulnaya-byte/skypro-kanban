@@ -38,11 +38,11 @@ export const categoryThemes = [
 ]
 
 export const browseStatusThemes = [
-  { text: 'Без статуса', className: '_hide' },
+  { text: 'Без статуса', className: '_gray', textClassName: '_gray' },
   { text: 'Нужно сделать', className: '_gray', textClassName: '_gray' },
-  { text: 'В работе', className: '_hide' },
-  { text: 'Тестирование', className: '_hide' },
-  { text: 'Готово', className: '_hide' },
+  { text: 'В работе', className: '_gray', textClassName: '_gray' },
+  { text: 'Тестирование', className: '_gray', textClassName: '_gray' },
+  { text: 'Готово', className: '_gray', textClassName: '_gray' },
 ]
 
 export const calendarDayNames = [
