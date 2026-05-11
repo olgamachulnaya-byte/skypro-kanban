@@ -20,9 +20,13 @@ function RegisterPage({ isAuth, onRegister }) {
     setIsSubmitting(true)
     try {
       const data = await registerUser({ name, login: email, password })
-      if (!data?.user?.token) throw new Error('Регистрация прошла, но токен не получен.')
-      setToken(data.user.token)
-      onRegister({ name: data.user.name || name })
+      const token = data?.user?.token || data?.token
+      const userName = data?.user?.name || data?.name || name
+
+      if (!token) throw new Error('Регистрация прошла, но токен не получен.')
+
+      setToken(token)
+      onRegister({ name: userName })
       alert('Регистрация прошла успешно.')
     } catch (err) {
       setError(err.message)

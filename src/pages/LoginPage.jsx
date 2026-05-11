@@ -27,9 +27,13 @@ function LoginPage({ isAuth, onLogin }) {
     setIsSubmitting(true)
     try {
       const data = await loginUser({ login: email, password })
-      if (!data?.user?.token) throw new Error('Сервер не вернул токен авторизации.')
-      setToken(data.user.token)
-      onLogin({ name: data.user.name || email })
+       const token = data?.user?.token || data?.token
+      const userName = data?.user?.name || data?.name || email
+
+      if (!token) throw new Error('Сервер не вернул токен авторизации.')
+
+      setToken(token)
+      onLogin({ name: userName })
       alert('Вход выполнен успешно.')
     } catch (err) {
       setError(err.message)
