@@ -17,12 +17,7 @@ export async function apiRequest(path, { method = 'GET', body, auth = false } = 
  const headers = {}
 
 
-  if (body && !(body instanceof FormData)) {
-    headers.Accept = 'application/json'
-    headers['Content-Type'] = 'application/json'
-    } else {
-    headers.Accept = 'application/json'
-  }
+  headers.Accept = 'application/json'
 
   if (auth) {
     const token = getToken()
