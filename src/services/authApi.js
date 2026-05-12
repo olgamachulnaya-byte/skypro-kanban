@@ -7,18 +7,6 @@ const getAuthErrorMessage = (status) => {
   return 'Не удалось выполнить запрос авторизации.'
 }
 
-const toFormData = (payload) => {
-  const formData = new FormData()
-
-  Object.entries(payload).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
-      formData.append(key, value)
-    }
-  })
-
-  return formData
-}
-
 async function authRequest(path = '', payload) {
   let response
 
@@ -27,8 +15,9 @@ async function authRequest(path = '', payload) {
       method: 'POST',
       headers: {
         Accept: 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: toFormData(payload),
+      body: JSON.stringify(payload),
     })
   } catch {
     throw new Error('Ошибка сети. Проверьте подключение к интернету.')
