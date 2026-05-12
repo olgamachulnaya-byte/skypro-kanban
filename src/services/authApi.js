@@ -7,16 +7,24 @@ const getAuthErrorMessage = (status) => {
   return 'Не удалось выполнить запрос авторизации.'
 }
 
+const toFormData = (payload) => {
+  const formData = new FormData()
+
+  Object.entries(payload).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      formData.append(key, value)
+    }
+  })
+
+  return formData
+}
+
 async function authRequest(path = '', payload) {
   let response
 
   try {
     response = await fetch(`${AUTH_BASE_URL}${path}`, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify(payload),
     })
   } catch {
