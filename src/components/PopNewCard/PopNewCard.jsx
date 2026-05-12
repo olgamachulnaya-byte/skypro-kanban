@@ -5,7 +5,7 @@ import { Link, useNavigate } from '../../lib/router'
 import { createTask } from '../../services/tasksApi'
 
 function PopNewCard({ forceOpen = false }) {
-const navigate = useNavigate()
+  const navigate = useNavigate()
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [topic, setTopic] = useState(categoryThemes[0].text)
@@ -29,7 +29,7 @@ const navigate = useNavigate()
         description: description.trim(),
         topic,
         status: 'Без статуса',
-        date: date || new Date().toISOString(),
+        date: date || new Date().toISOString().slice(0, 10),
       })
       window.dispatchEvent(new Event('tasks:changed'))
       alert('Задача успешно создана.')
@@ -40,7 +40,6 @@ const navigate = useNavigate()
       setIsSubmitting(false)
     }
   }
-
 
   return (
     <div className="pop-new-card" id="popNewCard" style={forceOpen ? { display: 'block' } : undefined}>
@@ -85,17 +84,12 @@ const navigate = useNavigate()
                   ></textarea>
                 </div>
 
-                 <div className="form-new__block">
-                  <label htmlFor="formDate" className="subttl">Дата исполнения</label>
-                  <input
-                    className="form-new__input"
-                    id="formDate"
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value ? new Date(e.target.value).toISOString() : '')}
-                  />
+                  <div className="form-new__block">
+                  <label htmlFor="formDate" className="subttl">
+                    Дата исполнения
+                  </label>
+                  <input className="form-new__input" id="formDate" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
                 </div>
-
               </form>
 
               <div className="pop-new-card__calendar">
@@ -119,13 +113,7 @@ const navigate = useNavigate()
               </div>
             </div>
 
- <button
-              className="form-new__create _hover01"
-              id="btnCreate"
-              form="formNewCard"
-              type="submit"
-              disabled={isSubmitting}
-            >
+            <button className="form-new__create _hover01" id="btnCreate" form="formNewCard" type="submit" disabled={isSubmitting}>
               {isSubmitting ? 'Создание...' : 'Создать задачу'}
             </button>
 
