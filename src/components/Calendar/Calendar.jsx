@@ -81,7 +81,7 @@ function Calendar({ onDateSelect, selectedDate, variant = 'new' }) {
 
         <div className="calendar__period">
           <p className="calendar__p date-end">
-             Выберите срок исполнения
+             Срок исполнения
             <span className="date-control">{periodValue}</span>
           </p>
         </div>
