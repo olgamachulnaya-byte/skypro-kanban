@@ -97,7 +97,7 @@ export const calendarVariants = {
   new: {
     inputId: 'datepick_value_new',
     value: '08.09.2023',
-    periodText: 'Выберите срок исполнения ',
+    periodText: 'Выберите срок исполнения',
     periodValue: '',
     cells: baseCalendarCells,
   },
