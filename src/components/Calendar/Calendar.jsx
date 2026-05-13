@@ -32,9 +32,13 @@ function Calendar({ onDateSelect, selectedDate, variant = 'new' }) {
     return { dayNumber, cellDate, isSelected, isToday }
   })
 
-   const periodLabel = variant === 'new' ? 'Выберете срок исполнения' : 'Срок исполнения'
+  const periodLabel = selected ? 'Срок исполнения:' : 'Выберите срок исполнения.'
   const periodValue = selected
-    ? ` ${new Intl.DateTimeFormat('ru-RU').format(selected)}`
+   ? ` ${new Intl.DateTimeFormat('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit',
+      }).format(selected)}.`
     : ''
 
   return (
