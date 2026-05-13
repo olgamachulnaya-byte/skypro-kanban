@@ -32,7 +32,6 @@ function PopNewCard({ forceOpen = false }) {
         date: date || new Date().toISOString().slice(0, 10),
       })
       window.dispatchEvent(new Event('tasks:changed'))
-      alert('Задача успешно создана.')
       navigate('/', { replace: true })
     } catch (err) {
       setError(err.message)
@@ -84,16 +83,10 @@ function PopNewCard({ forceOpen = false }) {
                   ></textarea>
                 </div>
 
-                  <div className="form-new__block">
-                  <label htmlFor="formDate" className="subttl">
-                    Дата исполнения
-                  </label>
-                  <input className="form-new__input" id="formDate" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-                </div>
               </form>
 
               <div className="pop-new-card__calendar">
-                <Calendar variant="new" />
+                 <Calendar variant="new" selectedDate={date} onDateSelect={setDate} />
               </div>
             </div>
 

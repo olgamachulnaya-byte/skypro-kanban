@@ -27,8 +27,7 @@ function RegisterPage({ isAuth, onRegister }) {
 
       setToken(token)
       onRegister({ name: userName })
-      alert('Регистрация прошла успешно.')
-    } catch (err) {
+      } catch (err) {
       setError(err.message)
     } finally {
       setIsSubmitting(false)

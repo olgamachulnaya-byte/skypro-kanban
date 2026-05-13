@@ -40,7 +40,6 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
     try {
       await deleteTask(cardId)
       window.dispatchEvent(new Event('tasks:changed'))
-      alert('Задача удалена.')
       navigate('/', { replace: true })
     } catch (err) {
       setError(err.message)
@@ -62,7 +61,6 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
         date: task.date,
       })
       window.dispatchEvent(new Event('tasks:changed'))
-      alert('Задача обновлена.')
       navigate(`/card/${cardId}`, { replace: true })
     } catch (err) {
       setError(err.message)
@@ -126,7 +124,7 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
                   </form>
 
                 <div className="pop-new-card__calendar">
-                    <Calendar variant="browse" />
+                     <Calendar variant="browse" selectedDate={task.date} />
                   </div>
                 </div>
                 

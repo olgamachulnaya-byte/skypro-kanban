@@ -34,8 +34,7 @@ function LoginPage({ isAuth, onLogin }) {
 
       setToken(token)
       onLogin({ name: userName })
-      alert('Вход выполнен успешно.')
-    } catch (err) {
+      } catch (err) {
       setError(err.message)
     } finally {
       setIsSubmitting(false)
