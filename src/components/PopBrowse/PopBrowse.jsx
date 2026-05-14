@@ -91,15 +91,15 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
                   <div className="pop-browse__status status">
                   <p className="status__p subttl">Статус</p>
                   <div className="status__themes">
-                    {browseStatusThemes.map(({ text, className, textClassName }) => (
+                    {browseStatusThemes.map(({ text }) => (
                       <button
                         key={text}
                         type="button"
-                        className={`status__theme ${className}${status === text ? ' _active-category' : ''}`}
+                        className={`status__theme${status === text ? ' _active-category' : ''}`}
                         onClick={() => isEditMode && setStatus(text)}
                         disabled={!isEditMode}
                       >
-                        <p className={textClassName}>{text}</p>
+                       <p>{text}</p>
                       </button>
                     ))}
                   </div>

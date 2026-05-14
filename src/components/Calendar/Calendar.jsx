@@ -1,19 +1,30 @@
 import { useMemo, useState } from 'react'
 import { calendarDayNames } from '../../data/mockData'
 
+const parseDateString = (value) => {
+  if (!value) return null
+  const [year, month, day] = value.split('-').map(Number)
+  if (!year || !month || !day) return null
+  const parsed = new Date(year, month - 1, day)
+  return Number.isNaN(parsed.getTime()) ? null : parsed
+}
+
+const formatDateString = (date) => {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 function Calendar({ onDateSelect, selectedDate, variant = 'new' }) {
   const [currentDate, setCurrentDate] = useState(() => {
-    if (selectedDate) {
-      const parsed = new Date(selectedDate)
-      if (!Number.isNaN(parsed.getTime())) return parsed
-    }
+   const parsed = parseDateString(selectedDate)
+    if (parsed) return parsed
     return new Date()
   })
 
   const selected = useMemo(() => {
-    if (!selectedDate) return null
-    const parsed = new Date(selectedDate)
-    return Number.isNaN(parsed.getTime()) ? null : parsed
+   return parseDateString(selectedDate)
   }, [selectedDate])
 
   const month = currentDate.getMonth()
@@ -76,7 +87,7 @@ function Calendar({ onDateSelect, selectedDate, variant = 'new' }) {
                 key={index}
                 type="button"
                 className={`calendar__cell ${cell ? '_cell-day' : '_other-month'}${cell?.isSelected ? ' _active-day' : ''}${cell?.isToday ? ' _current' : ''}`}
-                onClick={() => cell && onDateSelect?.(cell.cellDate.toISOString().slice(0, 10))}
+                onClick={() => cell && onDateSelect?.(formatDateString(cell.cellDate))}
               >
                 {cell ? cell.dayNumber : ''}
               </button>

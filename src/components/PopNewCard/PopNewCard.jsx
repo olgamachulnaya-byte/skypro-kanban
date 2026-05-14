@@ -4,6 +4,14 @@ import { categoryThemes } from '../../data/mockData'
 import { Link, useNavigate } from '../../lib/router'
 import { createTask } from '../../services/tasksApi'
 
+const getTodayDateString = () => {
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 function PopNewCard({ forceOpen = false }) {
   const navigate = useNavigate()
   const [title, setTitle] = useState('')
@@ -29,7 +37,7 @@ function PopNewCard({ forceOpen = false }) {
         description: description.trim(),
         topic,
         status: 'Без статуса',
-        date: date || new Date().toISOString().slice(0, 10),
+        date: date || getTodayDateString(),
       })
       window.dispatchEvent(new Event('tasks:changed'))
       navigate('/', { replace: true })
