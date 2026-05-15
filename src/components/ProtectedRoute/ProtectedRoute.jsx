@@ -1,6 +1,8 @@
+import { useAuth } from '../../contexts/AuthContext'
 import { Navigate } from '../../lib/router'
 
-function ProtectedRoute({ isAuth, children }) {
+function ProtectedRoute({ children }) {
+  const { isAuth } = useAuth()
   if (!isAuth) {
     return <Navigate to="/login" replace />
   }

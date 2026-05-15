@@ -3,10 +3,12 @@ import Calendar from '../Calendar/Calendar'
 import { browseStatusThemes, categoryThemes } from '../../data/mockData'
 import { Link, useNavigate } from '../../lib/router'
 import { deleteTask, getTaskById, updateTask } from '../../services/tasksApi'
+import { useTask } from '../../contexts/TaskContext'
 
 function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
   const isEditMode = mode === 'edit'
   const navigate = useNavigate()
+  const { removeTask, updateTask: updateTaskInState } = useTask()
   const [task, setTask] = useState(null)
   const [description, setDescription] = useState('')
   const [status, setStatus] = useState('Без статуса')
@@ -39,7 +41,7 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
     setIsSubmitting(true)
     try {
       await deleteTask(cardId)
-      window.dispatchEvent(new Event('tasks:changed'))
+      removeTask(cardId)
       navigate('/', { replace: true })
     } catch (err) {
       setError(err.message)
@@ -53,14 +55,20 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
     setError('')
     setIsSubmitting(true)
     try {
-      await updateTask(cardId, {
+      const data = await updateTask(cardId, {
         title: task.title,
         topic: task.topic,
         status,
         description,
         date: task.date,
       })
-      window.dispatchEvent(new Event('tasks:changed'))
+      const updatedTask = data?.task || data
+      updateTaskInState(cardId, {
+        title: updatedTask?.title || task.title,
+        topic: updatedTask?.topic || task.topic,
+        status: updatedTask?.status || status,
+        date: updatedTask?.date || task.date,
+      })
       navigate(`/card/${cardId}`, { replace: true })
     } catch (err) {
       setError(err.message)

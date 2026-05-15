@@ -12,8 +12,10 @@ import {
 } from './pages.styled'
 import { loginUser } from '../services/authApi'
 import { setToken } from '../services/apiClient'
+import { useAuth } from '../contexts/AuthContext'
 
-function LoginPage({ isAuth, onLogin }) {
+function LoginPage() {
+  const { isAuth, handleLogin } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -27,14 +29,14 @@ function LoginPage({ isAuth, onLogin }) {
     setIsSubmitting(true)
     try {
       const data = await loginUser({ login: email, password })
-       const token = data?.user?.token || data?.token
+      const token = data?.user?.token || data?.token
       const userName = data?.user?.name || data?.name || email
 
       if (!token) throw new Error('Сервер не вернул токен авторизации.')
 
       setToken(token)
-      onLogin({ name: userName })
-      } catch (err) {
+      handleLogin({ name: userName })
+    } catch (err) {
       setError(err.message)
     } finally {
       setIsSubmitting(false)

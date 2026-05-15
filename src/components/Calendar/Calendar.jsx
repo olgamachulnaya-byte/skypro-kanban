@@ -16,7 +16,7 @@ const formatDateString = (date) => {
   return `${year}-${month}-${day}`
 }
 
-function Calendar({ onDateSelect, selectedDate, variant = 'new' }) {
+function Calendar({ onDateSelect, selectedDate }) {
   const [currentDate, setCurrentDate] = useState(() => {
    const parsed = parseDateString(selectedDate)
     if (parsed) return parsed
