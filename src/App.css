@@ -118,6 +118,8 @@ body {
   flex-wrap: wrap;
 }
 .calendar__cell {
+  border: none;
+  background: transparent;
   width: 22px;
   height: 22px;
   margin: 2px;
@@ -148,6 +150,8 @@ body {
   justify-content: space-between;
 }
 .nav__action {
+  border: none;
+  background: transparent;
   width: 18px;
   height: 25px;
   cursor: pointer;
@@ -369,6 +373,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .form-browse__area {
   max-width: 370px;
   width: 100%;
@@ -400,6 +405,15 @@ body {
   margin-right: 7px;
   margin-bottom: 7px;
 }
+
+.status__theme._active-category {
+  background: #94a6be;
+}
+
+.status__theme._active-category p {
+  color: #fff;
+}
+
 .status__theme p {
   font-size: 14px;
   letter-spacing: -0.14px;
