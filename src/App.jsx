@@ -1,3 +1,4 @@
+import AppRoutes from './components/AppRoutes/AppRoutes'
 import AuthProvider from './contexts/AuthProvider'
 import TaskProvider from './contexts/TaskProvider'
 
