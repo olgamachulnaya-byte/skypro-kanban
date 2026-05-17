@@ -1,6 +1,6 @@
 import { Container } from '../../App.styled'
 import Column from '../Column/Column'
-import { Loading, MainBlock, MainContent, MainRoot } from './Main.styled'
+import { Loading, LoadingDots, MainBlock, MainContent, MainRoot } from './Main.styled'
 
 function Main({ columns, cards, isLoading, error }) {
   return (
@@ -9,7 +9,14 @@ function Main({ columns, cards, isLoading, error }) {
         <MainBlock>
           <MainContent>
             {isLoading ? (
-              <Loading>Данные загружаются</Loading>
+              <Loading>
+                <LoadingDots aria-hidden='true'>
+                  <span />
+                  <span />
+                  <span />
+                </LoadingDots>
+                <p>Данные загружаются...</p>
+              </Loading>
                ) : error ? (
               <Loading style={{ color: '#ff4d4f' }}>{error}</Loading>
             ) : (
