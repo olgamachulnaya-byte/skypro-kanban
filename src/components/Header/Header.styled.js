@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const HeaderRoot = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.surface};
 `
 
 export const HeaderBlock = styled.div`
@@ -15,14 +15,10 @@ export const HeaderBlock = styled.div`
   padding: 0 10px;
 `
 
-export const LogoLight = styled.div`
+export const Logo = styled.div`
   img {
     width: 85px;
   }
-`
-
-export const LogoDark = styled.div`
-  display: none;
 `
 
 export const Nav = styled.nav`
@@ -36,7 +32,7 @@ export const NewTaskButton = styled.button`
   width: 178px;
   height: 30px;
   border-radius: 4px;
-  background-color: #565eef;
+  background-color: ${({ theme }) => theme.colors.primary};
   color: #fff;
   border: none;
   font-size: 14px;
@@ -45,7 +41,7 @@ export const NewTaskButton = styled.button`
   margin-right: 20px;
 
   &:hover {
-    background-color: #33399b;
+    background-color: ${({ theme }) => theme.colors.primaryHover};
   }
 
   a {
@@ -71,10 +67,10 @@ export const UserLink = styled.a`
   justify-content: center;
   font-size: 14px;
   line-height: 20px;
-  color: #565eef;
+  color: ${({ theme }) => theme.colors.primary};
 
   &:hover {
-    color: #33399b;
+    color: ${({ theme }) => theme.colors.primaryHover};
   }
 
   &::after {
@@ -83,14 +79,14 @@ export const UserLink = styled.a`
     width: 6px;
     height: 6px;
     border-radius: 1px;
-    border-left: 1.9px solid #565eef;
-    border-bottom: 1.9px solid #565eef;
+    border-left: 1.9px solid ${({ theme }) => theme.colors.primary};
+    border-bottom: 1.9px solid ${({ theme }) => theme.colors.primary};
     transform: rotate(-45deg);
     margin: -6px 0 0 5px;
   }
 
   &:hover::after {
-    border-left-color: #33399b;
-    border-bottom-color: #33399b;
+    border-left-color: ${({ theme }) => theme.colors.primaryHover};
+    border-bottom-color: ${({ theme }) => theme.colors.primaryHover};
   }
 `

@@ -7,8 +7,8 @@ export const PopUserRoot = styled.div`
   width: 213px;
   height: 205px;
   border-radius: 10px;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
-  background: #fff;
+  border: 0.7px solid ${({ theme }) => theme.colors.border};
+  background: ${({ theme }) => theme.colors.surface};
   box-shadow: 0 10px 39px 0 rgba(26, 56, 101, 0.21);
   padding: 34px;
   text-align: center;
@@ -22,13 +22,13 @@ export const CloseButton = styled.button`
   right: 12px;
   border: none;
   background: transparent;
-  color: #94a6be;
+  color: ${({ theme }) => theme.colors.textSecondary};
   font-size: 14px;
   line-height: 1;
 `
 
 export const Name = styled.p`
-  color: #000;
+  color: ${({ theme }) => theme.colors.textPrimary};
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
@@ -37,7 +37,7 @@ export const Name = styled.p`
 `
 
 export const Email = styled.p`
-  color: #94a6be;
+  color: ${({ theme }) => theme.colors.textSecondary};
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.14px;
@@ -51,7 +51,7 @@ export const ThemeRow = styled.div`
   margin-bottom: 30px;
 
   p {
-    color: #000;
+    color: ${({ theme }) => theme.colors.textPrimary};
     font-size: 14px;
     line-height: 21px;
     letter-spacing: -0.14px;
@@ -63,7 +63,7 @@ export const ThemeCheckbox = styled.input`
   width: 24px;
   height: 13px;
   border-radius: 100px;
-  background: #eaeef6;
+  background: ${({ theme }) => theme.colors.switchBg};
   outline: none;
   appearance: none;
 
@@ -75,7 +75,7 @@ export const ThemeCheckbox = styled.input`
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background-color: #94a6be;
+    background-color: ${({ theme }) => theme.colors.switchThumb};
     transition: 0.5s;
   }
 
@@ -88,16 +88,16 @@ export const LogoutButton = styled.button`
   width: 72px;
   height: 30px;
   background: transparent;
-  color: #565eef;
+  color: ${({ theme }) => theme.colors.primary};
   border-radius: 4px;
-  border: 1px solid #565eef;
+  border: 1px solid ${({ theme }) => theme.colors.primary};
 
   a {
-    color: #565eef;
+    color: ${({ theme }) => theme.colors.primary};
   }
 
   &:hover {
-    background-color: #33399b;
+    background-color: ${({ theme }) => theme.colors.primaryHover};
     color: #fff;
   }
 

@@ -16,7 +16,7 @@ const pulse = keyframes`
 
 export const MainRoot = styled.main`
   width: 100%;
-  background-color: #eaeef6;
+  background-color: ${({ theme }) => theme.colors.boardBg};
 `
 
 export const MainBlock = styled.div`
@@ -45,7 +45,7 @@ export const Loading = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #94a6be;
+  color: ${({ theme }) => theme.colors.textSecondary};
   font-size: 24px;
   font-weight: 600;
   line-height: 1;
@@ -65,7 +65,7 @@ export const LoadingDots = styled.div`
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background-color: #565eef;
+    background-color: ${({ theme }) => theme.colors.primary};
     animation: ${pulse} 1.2s ease-in-out infinite;
 
     &:nth-child(2) {

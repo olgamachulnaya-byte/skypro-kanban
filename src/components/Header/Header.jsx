@@ -5,15 +5,16 @@ import PopUser from '../PopUser/PopUser'
 import {
   HeaderBlock,
   HeaderRoot,
-  LogoDark,
-  LogoLight,
+  Logo,
   Nav,
   NewTaskButton,
   UserLink,
 } from './Header.styled'
+import { useAppTheme } from '../../contexts/ThemeContext'
 
 function Header({ user }) {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+  const { isDark } = useAppTheme()
 
   const handleUserClick = (event) => {
     event.preventDefault()
@@ -28,17 +29,11 @@ function Header({ user }) {
     <HeaderRoot>
       <Container>
         <HeaderBlock>
-          <LogoLight>
+          <Logo>
             <Link to="/">
-              <img src="/images/logo.png" alt="logo" />
+              <img src={isDark ? "/images/logo_dark.png" : "/images/logo.png"} alt="logo" />
             </Link>
-          </LogoLight>
-
-          <LogoDark>
-            <Link to="/">
-              <img src="/images/logo_dark.png" alt="logo" />
-            </Link>
-          </LogoDark>
+          </Logo>
 
           <Nav>
             <NewTaskButton id="btnMainNew">
