@@ -3,9 +3,11 @@ import { Link, Navigate } from '../lib/router'
 import { AuthCard, AuthFooter, AuthForm, AuthInput, AuthPageRoot, AuthTitle, Logo, PrimaryButton } from './pages.styled'
 import { registerUser } from '../services/authApi'
 import { setToken } from '../services/apiClient'
+import { useAuth } from '../contexts/AuthContext'
 
-function RegisterPage({ isAuth, onRegister }) {
-   const [name, setName] = useState('')
+function RegisterPage() {
+  const { isAuth, handleLogin } = useAuth()
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -26,8 +28,8 @@ function RegisterPage({ isAuth, onRegister }) {
       if (!token) throw new Error('Регистрация прошла, но токен не получен.')
 
       setToken(token)
-      onRegister({ name: userName })
-      } catch (err) {
+      handleLogin({ name: userName })
+    } catch (err) {
       setError(err.message)
     } finally {
       setIsSubmitting(false)

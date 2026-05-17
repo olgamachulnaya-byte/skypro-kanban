@@ -3,13 +3,16 @@ import Calendar from '../Calendar/Calendar'
 import { browseStatusThemes, categoryThemes } from '../../data/mockData'
 import { Link, useNavigate } from '../../lib/router'
 import { deleteTask, getTaskById, updateTask } from '../../services/tasksApi'
+import { useTask } from '../../contexts/TaskContext'
 
 function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
   const isEditMode = mode === 'edit'
   const navigate = useNavigate()
+  const { removeTask, updateTask: updateTaskInState } = useTask()
   const [task, setTask] = useState(null)
   const [description, setDescription] = useState('')
   const [status, setStatus] = useState('Без статуса')
+  const [date, setDate] = useState('')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -24,6 +27,7 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
         setTask(nextTask)
         setDescription(nextTask?.description || '')
         setStatus(nextTask?.status || 'Без статуса')
+        setDate(nextTask?.date || '')
       } catch (err) {
         setError(err.message)
       } finally {
@@ -34,12 +38,19 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
     loadTask()
   }, [cardId])
 
+  useEffect(() => {
+    if (!task || isEditMode) return
+    setDescription(task.description || '')
+    setStatus(task.status || 'Без статуса')
+    setDate(task.date || '')
+  }, [isEditMode, task])
+
   const handleDelete = async () => {
     setError('')
     setIsSubmitting(true)
     try {
       await deleteTask(cardId)
-      window.dispatchEvent(new Event('tasks:changed'))
+      removeTask(cardId)
       navigate('/', { replace: true })
     } catch (err) {
       setError(err.message)
@@ -53,14 +64,21 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
     setError('')
     setIsSubmitting(true)
     try {
-      await updateTask(cardId, {
+      const data = await updateTask(cardId, {
         title: task.title,
         topic: task.topic,
         status,
         description,
-        date: task.date,
+        date,
       })
-      window.dispatchEvent(new Event('tasks:changed'))
+      const updatedTask = data?.task || data
+      updateTaskInState(cardId, {
+        title: updatedTask?.title || task.title,
+        topic: updatedTask?.topic || task.topic,
+        status: updatedTask?.status || status,
+        date: updatedTask?.date || date,
+      })
+      setTask((prev) => (prev ? { ...prev, date: updatedTask?.date || date } : prev))
       navigate(`/card/${cardId}`, { replace: true })
     } catch (err) {
       setError(err.message)
@@ -124,7 +142,7 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
                   </form>
 
                 <div className="pop-new-card__calendar">
-                     <Calendar variant="browse" selectedDate={task.date} />
+                     <Calendar variant="browse" selectedDate={date} onDateSelect={isEditMode ? setDate : undefined} />
                   </div>
                 </div>
                 
@@ -155,7 +173,7 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
                       <button className="btn-edit__edit _btn-bg _hover01" type="button" onClick={handleSave} disabled={isSubmitting}>
                         Сохранить
                       </button>
-                      <button className="btn-edit__edit _btn-bor _hover03" type="button">
+                      <button className="btn-edit__edit _btn-bor _hover03" type="button" onClick={() => { setDescription(task?.description || ''); setStatus(task?.status || 'Без статуса'); setDate(task?.date || '') }}>
                         <Link to={`/card/${cardId}`}>Отменить</Link>
                       </button>
                       <button className="btn-edit__delete _btn-bor _hover03" id="btnDelete" type="button" onClick={handleDelete} disabled={isSubmitting}>

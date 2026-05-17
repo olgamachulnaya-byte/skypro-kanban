@@ -1,4 +1,5 @@
 import { Link } from '../../lib/router'
+import { formatCardDate } from '../../utils/date'
 import {
   CardBody,
   CardContent,
@@ -55,7 +56,7 @@ function Card({ id, themeClass, themeText, title = 'Название задач�
                 </clipPath>
               </defs>
             </svg>
-            <p>{date}</p>
+            <p>{formatCardDate(date)}</p>
           </CardDate>
         </CardContent>
       </CardBody>

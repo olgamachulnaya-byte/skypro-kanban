@@ -3,6 +3,7 @@ import Calendar from '../Calendar/Calendar'
 import { categoryThemes } from '../../data/mockData'
 import { Link, useNavigate } from '../../lib/router'
 import { createTask } from '../../services/tasksApi'
+import { useTask } from '../../contexts/TaskContext'
 
 const getTodayDateString = () => {
   const today = new Date()
@@ -14,6 +15,7 @@ const getTodayDateString = () => {
 
 function PopNewCard({ forceOpen = false }) {
   const navigate = useNavigate()
+  const { addTask } = useTask()
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [topic, setTopic] = useState(categoryThemes[0].text)
@@ -32,14 +34,21 @@ function PopNewCard({ forceOpen = false }) {
 
     setIsSubmitting(true)
     try {
-      await createTask({
+      const data = await createTask({
         title: title.trim(),
         description: description.trim(),
         topic,
         status: 'Без статуса',
         date: date || getTodayDateString(),
       })
-      window.dispatchEvent(new Event('tasks:changed'))
+      const createdTask = data?.task || data
+      addTask({
+        id: createdTask?._id || createdTask?.id,
+        topic: createdTask?.topic || topic,
+        title: createdTask?.title || title.trim(),
+        date: createdTask?.date || date || getTodayDateString(),
+        status: createdTask?.status || 'Без статуса',
+      })
       navigate('/', { replace: true })
     } catch (err) {
       setError(err.message)

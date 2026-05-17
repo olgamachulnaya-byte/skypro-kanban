@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useAuth } from '../contexts/AuthContext'
+import { useTask } from '../contexts/TaskContext'
 import { AppWrapper } from '../App.styled'
 import Header from '../components/Header/Header'
 import Main from '../components/Main/Main'
@@ -6,9 +8,10 @@ import { columns } from '../data/mockData'
 import { Outlet } from '../lib/router'
 import { getTasks } from '../services/tasksApi'
 
-function BoardPage({ user }) {
+function BoardPage() {
   const [isLoading, setIsLoading] = useState(true)
-  const [cards, setCards] = useState([])
+  const { user } = useAuth()
+  const { tasks: cards, setTasks } = useTask()
   const [error, setError] = useState('')
   const formatTaskDate = (value) => {
     if (!value) return 'Без даты'
@@ -27,7 +30,7 @@ function BoardPage({ user }) {
     try {
       const data = await getTasks()
       const tasks = Array.isArray(data?.tasks) ? data.tasks : Array.isArray(data) ? data : []
-      setCards(tasks.map((task) => ({
+      setTasks(tasks.map((task) => ({
         id: task._id || task.id,
         topic: task.topic || 'Web Design',
         title: task.title || 'Без названия',
@@ -39,7 +42,7 @@ function BoardPage({ user }) {
     } finally {
       setIsLoading(false)
     }
-      }, [])
+ }, [setTasks])
 
   useEffect(() => {
     loadTasks()
