@@ -38,6 +38,10 @@ function BoardPage() {
         status: task.status || 'Без статуса',
       })))
     } catch (err) {
+       if (err?.status === 404) {
+        setTasks([])
+        return
+      }
       setError(err.message)
     } finally {
       setIsLoading(false)

@@ -3,6 +3,8 @@ import Column from '../Column/Column'
 import { Loading, LoadingDots, MainBlock, MainContent, MainRoot } from './Main.styled'
 
 function Main({ columns, cards, isLoading, error }) {
+  const hasNoTasks = !isLoading && !error && cards.length === 0
+  
   return (
     <MainRoot>
       <Container>
@@ -17,8 +19,10 @@ function Main({ columns, cards, isLoading, error }) {
                 </LoadingDots>
                 <p>Данные загружаются...</p>
               </Loading>
-               ) : error ? (
+            ) : error ? (
               <Loading style={{ color: '#ff4d4f' }}>{error}</Loading>
+            ) : hasNoTasks ? (
+              <Loading>Новых задач нет</Loading>
             ) : (
               columns.map((column) => (
                 <Column key={column.title} title={column.title} cards={cards.filter((card) => card.status === column.title)} />
