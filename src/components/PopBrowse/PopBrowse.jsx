@@ -62,13 +62,21 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
   const handleSave = async () => {
     if (!task) return
     setError('')
+   const trimmedDescription = description.trim()
+
+    if (!trimmedDescription) {
+      setError('Описание задачи не может быть пустым.')
+      return
+    }
+
+
     setIsSubmitting(true)
     try {
       const data = await updateTask(cardId, {
         title: task.title,
         topic: task.topic,
         status,
-        description,
+        description: trimmedDescription,
         date,
       })
       const updatedTask = data?.task || data
@@ -78,7 +86,8 @@ function PopBrowse({ forceOpen = false, cardId, mode = 'view' }) {
         status: updatedTask?.status || status,
         date: updatedTask?.date || date,
       })
-      setTask((prev) => (prev ? { ...prev, date: updatedTask?.date || date } : prev))
+     setDescription(updatedTask?.description || trimmedDescription)
+     setTask((prev) => (prev ? { ...prev, date: updatedTask?.date || date, description: updatedTask?.description || trimmedDescription } : prev))
       navigate(`/card/${cardId}`, { replace: true })
     } catch (err) {
       setError(err.message)

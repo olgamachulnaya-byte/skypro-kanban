@@ -26,17 +26,24 @@ function PopNewCard({ forceOpen = false }) {
   const handleSubmit = async (event) => {
     event.preventDefault()
     setError('')
+    const trimmedTitle = title.trim()
+    const trimmedDescription = description.trim()
 
-    if (!title.trim()) {
+    if (!trimmedTitle) {
       setError('Введите название задачи.')
+      return
+    }
+
+    if (!trimmedDescription) {
+      setError('Введите описание задачи.')
       return
     }
 
     setIsSubmitting(true)
     try {
       const data = await createTask({
-        title: title.trim(),
-        description: description.trim(),
+        title: trimmedTitle,
+        description: trimmedDescription,
         topic,
         status: 'Без статуса',
         date: date || getTodayDateString(),
@@ -45,7 +52,7 @@ function PopNewCard({ forceOpen = false }) {
       addTask({
         id: createdTask?._id || createdTask?.id,
         topic: createdTask?.topic || topic,
-        title: createdTask?.title || title.trim(),
+        title: createdTask?.title || trimmedTitle,
         date: createdTask?.date || date || getTodayDateString(),
         status: createdTask?.status || 'Без статуса',
       })

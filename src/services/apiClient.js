@@ -14,10 +14,12 @@ const getErrorMessage = (status, fallback = 'Произошла ошибка п�
 }
 
 export async function apiRequest(path, { method = 'GET', body, auth = false } = {}) {
- const headers = {}
-
+  const headers = {}
 
   headers.Accept = 'application/json'
+  if (body && !(body instanceof FormData)) {
+    headers['Content-Type'] = 'application/json'
+  }
 
   if (auth) {
     const token = getToken()
@@ -35,7 +37,15 @@ export async function apiRequest(path, { method = 'GET', body, auth = false } = 
     throw new Error('Ошибка сети. Проверьте подключение к интернету.')
   }
 
-  const data = await response.json().catch(() => null)
+ let data = null
+  const contentType = response.headers.get('content-type') || ''
+
+  if (contentType.includes('application/json')) {
+    data = await response.json().catch(() => null)
+  } else {
+    const text = await response.text().catch(() => '')
+    data = text ? { message: text } : null
+  }
   
   if (!response.ok) {
     throw new Error(data?.error || data?.message || getErrorMessage(response.status))
