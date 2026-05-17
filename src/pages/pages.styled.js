@@ -94,19 +94,30 @@ export const NotFoundRoot = styled.main`
   align-items: center;
   justify-content: center;
   padding: 16px;
-  background: radial-gradient(circle at top, #f3f5ff 0%, #eaedf6 45%, #dce1ef 100%);
+  background: #eaedf6;
 `
 
 export const NotFoundCard = styled.section`
   width: 100%;
-  max-width: 500px;
+  max-width: 368px;
   background: #fff;
-  border-radius: 16px;
-  padding: 52px 32px 36px;
+  border-radius: 10px;
+  padding: 44px 40px;
   text-align: center;
-  box-shadow: 0 18px 45px rgba(26, 56, 101, 0.18);
+  box-shadow: 0 10px 39px rgba(26, 56, 101, 0.12);
   a {
     text-decoration: none;
+  }
+
+   @media (max-width: 495px) {
+    max-width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px;
   }
 `
 
@@ -125,8 +136,8 @@ export const NotFoundCode = styled.p`
 `
 
 export const NotFoundTitle = styled.h1`
-  font-size: 28px;
-  line-height: 1.15;
+  font-size: 20px;
+  line-height: 1.2;
   margin-bottom: 12px;
 `
 
