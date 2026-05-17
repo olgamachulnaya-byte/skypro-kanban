@@ -1,16 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { TaskContext } from './TaskContext'
 import { useAuth } from './AuthContext'
 
 function TaskProvider({ children }) {
   const { isAuth } = useAuth()
   const [tasks, setTasks] = useState([])
-
-  useEffect(() => {
-    if (!isAuth) {
-      setTasks([])
-    }
-  }, [isAuth])
 
   const addTask = useCallback((task) => {
     setTasks((prev) => [task, ...prev])
@@ -25,8 +19,14 @@ function TaskProvider({ children }) {
   }, [])
 
   const taskValue = useMemo(
-    () => ({ tasks, setTasks, addTask, updateTask: updateTaskInState, removeTask }),
-    [tasks, addTask, updateTaskInState, removeTask],
+   () => ({
+      tasks: isAuth ? tasks : [],
+      setTasks,
+      addTask,
+      updateTask: updateTaskInState,
+      removeTask,
+    }),
+    [isAuth, tasks, addTask, updateTaskInState, removeTask],
   )
 
   return <TaskContext.Provider value={taskValue}>{children}</TaskContext.Provider>
